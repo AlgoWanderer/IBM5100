@@ -1,0 +1,55 @@
+IBM 5100 Simulator — Proprietary License (All Rights Reserved)
+
+Copyright (c) 2026 AlgoWanderer. All rights reserved.
+
+This repository is published so people can read the source code and learn
+from it. It is NOT open source. Publishing the source here does not grant
+any license except the limited permissions written below.
+
+1. WHAT YOU MAY DO
+   a. View and read the source code.
+   b. Download or clone it and run it on your own computer, privately,
+      for personal learning or evaluation.
+   c. Fork it on GitHub, to the extent GitHub's Terms of Service allow,
+      provided the fork keeps this LICENSE file unchanged.
+   d. Link to the official website and to this repository.
+
+2. WHAT YOU MAY NOT DO (without prior written permission from the copyright holder)
+   a. Publish, host, deploy or otherwise make available to the public this
+      website, the software, or any substantial part of it, whether on the
+      web, an app store, a game portal, or any other platform.
+   b. Do any of the above under a different name, title, domain, branding
+      or author credit, or with cosmetic changes, including by renaming it,
+      re-theming it, or presenting it as a new or original project.
+   c. Publish a derivative work: a modified version, port, or translation
+      of the code, design, text, or overall look and feel of the site.
+   d. Sell, sublicense, rent, or use the software or any part of it for any
+      commercial purpose.
+   e. Remove or alter this license, the copyright notice, or the credits.
+
+3. THIRD-PARTY MATERIAL
+   Some files are not owned by the copyright holder and remain under their
+   own licenses. Those licenses govern those files only:
+   - 3D model "IBM5100" by JP_2793, CC BY-NC 4.0
+     (https://creativecommons.org/licenses/by-nc/4.0/)
+   - CRT buzz audio by artificiallyinspired
+   - Fonts VT323 and IBM Plex Mono, SIL Open Font License 1.1
+   - npm dependencies, under their own licenses (MIT, Zlib)
+   Nothing in this license restricts rights that those licenses give you
+   in the third-party material itself.
+
+4. TRADEMARKS
+   IBM and IBM 5100 are trademarks of International Business Machines
+   Corporation. Steins;Gate is the property of MAGES. and 5pb. This project
+   is not affiliated with or endorsed by any of them.
+
+5. NO WARRANTY
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+   OR IMPLIED. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY
+   CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM THE SOFTWARE OR ITS USE.
+
+6. PERMISSION REQUESTS
+   To ask for permission for anything not allowed above, open an issue at
+   https://github.com/AlgoWanderer/IBM5100.
+
+Any use not expressly permitted above is prohibited.

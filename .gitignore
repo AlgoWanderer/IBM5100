@@ -1,0 +1,9 @@
+node_modules
+dist
+*.local
+tools/.tmp
+*.tsbuildinfo
+# full-size source model (20 MB); download from Sketchfab, see README
+/ibm5100.glb
+# original audio download; the site uses public/audio/crt-buzz.mp3
+/artificiallyinspired-*.mp3
