@@ -2,7 +2,7 @@
 // so no other sound files are needed. Everything starts from a user click,
 // because browsers block audio until the page is interacted with.
 
-const BUZZ_URL = "/audio/crt-buzz.mp3";
+const BUZZ_URL = `${import.meta.env.BASE_URL}audio/crt-buzz.mp3`;
 const BUZZ_VOLUME = 0.42;
 
 class SoundEngine {

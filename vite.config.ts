@@ -3,6 +3,8 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
+  // served from https://algowanderer.github.io/IBM5100/
+  base: "/IBM5100/",
   plugins: [react()],
   build: {
     // the lazy 3D chunk (three.js + postprocessing) is ~1 MB by nature; it

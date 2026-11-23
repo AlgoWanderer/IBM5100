@@ -12,7 +12,7 @@ import type { KeySlot } from "./keyMap";
 import { type PreparedModel, prepareModel } from "./prepareModel";
 import { type DisplayMode, ScreenRenderer } from "./ScreenTexture";
 
-const MODEL_URL = "/models/ibm5100.web.glb";
+const MODEL_URL = `${import.meta.env.BASE_URL}models/ibm5100.web.glb`;
 useGLTF.preload(MODEL_URL, false, true);
 
 /** The GLB is ~13 cm wide in its own units; scale it up to a comfortable size. */
