@@ -63,7 +63,7 @@ sensitive, and the names in brackets also work.
 | `SERN` | You are being watched |
 | `D-MAIL` (`DMAIL`, `D MAIL`) | Try to send a D-Mail |
 | `OPERATION SKULD` | Start the operation |
-| `LAB` (`FUTURE GADGET`) | Future Gadget Lab member list |
+| `LAB` (`FUTURE GADGET`) | Future Gadget Lab member list and the lab's homepage |
 | `OKABE` (`OKARIN`, `RINTAROU`, `KYOUMA`, `HOUOIN KYOUMA`, …) | The mad scientist introduces himself |
 | `KURISU` (`MAKISE`, `MAKISE KURISU`) | Every nickname Kurisu has been given |
 | `CHRISTINA` | She has something to say about that |

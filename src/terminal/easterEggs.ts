@@ -354,6 +354,8 @@ export function checkEasterEgg(input: string): EggResult | null {
           "  003 HASHIDA ITARU    004 MAKISE KURISU",
           "  005 KIRYU MOEKA      006 URUSHIBARA RUKA",
           "  007 FEYRIS NYANNYAN  008 AMANE SUZUHA",
+          "",
+          "  LAB HOMEPAGE ... FUTUREGADGET-LAB.COM",
         ],
       };
 
