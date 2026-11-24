@@ -191,9 +191,74 @@ export function checkEasterEgg(input: string): EggResult | null {
           "FUTURE GADGET LABORATORY - MEMBER LIST",
           "  001 HOUOIN KYOMA     002 SHIINA MAYURI",
           "  003 HASHIDA ITARU    004 MAKISE KURISU",
-          "  ...",
+          "  005 KIRYU MOEKA      006 URUSHIBARA RUKA",
+          "  007 FEYRIS NYANNYAN  008 AMANE SUZUHA",
         ],
       };
+
+    // ---- Okabe Rintarou, self-styled mad scientist ----
+    case "OKABE":
+    case "OKABE RINTAROU":
+    case "OKABE RINTARO":
+    case "RINTAROU":
+    case "RINTARO":
+    case "OKARIN":
+    case "KYOMA":
+    case "KYOUMA":
+    case "HOUOIN KYOMA":
+    case "HOUOIN KYOUMA":
+    case "HOUOUIN KYOUMA":
+      return {
+        effect: "glitch",
+        lines: [
+          "> I AM MAD SCIENTIST, HOUOIN KYOUMA!",
+          "  TRUE NAME ...... OKABE RINTAROU",
+          "  LAB MEMBER ..... 001",
+          "  AFFILIATION .... FUTURE GADGET LABORATORY",
+          "  RANK ........... FOUNDER / MAD SCIENTIST",
+          "  KNOWN ALSO AS .. OKARIN (BY 002, 004)",
+          "",
+          "> THE ORGANISATION IS WATCHING. MUHAHAHA!",
+          "> THIS IS THE CHOICE OF STEINS;GATE. EL PSY KONGROO.",
+        ],
+      };
+
+    // ---- Makise Kurisu and the pile of names Okabe gives her ----
+    case "KURISU":
+    case "MAKISE":
+    case "MAKISE KURISU":
+      return {
+        effect: "check",
+        lines: [
+          "MAKISE KURISU - ALIASES ON RECORD",
+          "  LAB MEMBER ........... 004",
+          "  CHRISTINA ............ (OKABE, WILL NOT STOP)",
+          "  THE ZOMBIE ........... (OKABE)",
+          "  CELEB SEVENTEEN ...... (POSTED AS, ON @CHANNEL)",
+          "  ASSISTANT ............ (OKABE)",
+          "  PERVERTED GENIUS GIRL  (OKABE, DISPUTED)",
+          "  AMERICAN VIRGIN ...... (DARU)",
+          "",
+          "  SHE IS NEUROSCIENCE. SHE IS NOT A ZOMBIE.",
+          "  \"IT'S NOT LIKE I LIKE YOU OR ANYTHING.\"",
+        ],
+      };
+    case "CHRISTINA":
+    case "CHRISTINAAA":
+      return {
+        effect: "glitch",
+        lines: [
+          "> STOP CALLING ME CHRISTINA!",
+          "  MY NAME IS MAKISE KURISU.",
+          "  (REF: KURISU)",
+        ],
+      };
+    case "ZOMBIE":
+    case "THE ZOMBIE":
+      return { lines: ["THE ZOMBIE IS NOT A ZOMBIE.", "  SEE: KURISU, LAB MEMBER 004."] };
+    case "CELEB SEVENTEEN":
+    case "ASSISTANT":
+      return { lines: ["ALIAS RESOLVED -> MAKISE KURISU (004).", "  TRY: KURISU"] };
   }
   return null;
 }

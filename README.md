@@ -38,6 +38,34 @@ computers, and again as the machine "John Titor" claimed he came back from
 | Reset view | double-click |
 | Break a program | Ctrl+C |
 
+## Easter eggs
+
+Type any of these at the `READY` prompt and press Enter. They are not case
+sensitive, and the names in brackets also work.
+
+| Command | What happens |
+| --- | --- |
+| **John Titor** | |
+| `TITOR` (`JOHN TITOR`, `TIMETRAVEL_0`) | A signal from 2036, and a tape left in the drive (try `DIR`) |
+| `C204` (`TIME MACHINE`) | Specs of Titor's time machine |
+| `2036` | Tries to reach the year 2036 |
+| `2038` (`Y2K38`, `Y2038`) | Live countdown to the Unix 32-bit time overflow |
+| `UNDOCUMENTED` (`HIDDEN`, `DEBUG`) | The 5100's real hidden feature |
+| **Steins;Gate** | |
+| `EL PSY KONGROO` (`EL PSY CONGROO`) | An incoming transmission |
+| `DIVERGENCE` (`WORLDLINE`, `WORLD LINE`) | Divergence meter reading, not always the same one |
+| `IBN 5100` (`IBN`, `IBN5100`) | The machine from another world line |
+| `SERN` | You are being watched |
+| `D-MAIL` (`DMAIL`, `D MAIL`) | Try to send a D-Mail |
+| `OPERATION SKULD` | Start the operation |
+| `LAB` (`FUTURE GADGET`) | Future Gadget Lab member list |
+| `OKABE` (`OKARIN`, `RINTAROU`, `KYOUMA`, `HOUOIN KYOUMA`, …) | The mad scientist introduces himself |
+| `KURISU` (`MAKISE`, `MAKISE KURISU`) | Every nickname Kurisu has been given |
+| `CHRISTINA` | She has something to say about that |
+| `ZOMBIE`, `ASSISTANT`, `CELEB SEVENTEEN` | Alias lookups for lab member 004 |
+| `SUZUHA` (`AMANE SUZUHA`) | A message from a part-timer |
+| `TUTURU` (`TUTTURU`) | Mayushii says hi |
+
 ## Running locally
 
 Requires Node.js 18+.
