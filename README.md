@@ -71,6 +71,7 @@ sensitive, and the names in brackets also work.
 | `NURUPO` (`NULLPO`) | The @channel call and response |
 | `SUZUHA` (`AMANE SUZUHA`) | A message from a part-timer |
 | `TUTURU` (`TUTTURU`) | Mayushii says hi |
+| `CREATOR` (`AUTHOR`, `MADE BY`, `WHO MADE THIS`, `LAB MEMBER 000`) | Who built this machine |
 | `THANK YOU` (`THANKS`, `ARIGATOU`, `OMEDETOU`, `CONGRATULATIONS`) | The Steins;Gate 100% completion photo, scanned onto the 5100's screen |
 
 The 5100 counts the 19 secrets above (not the pictures). Find them all and it

@@ -258,6 +258,25 @@ export function checkEasterEgg(input: string): EggResult | null {
       };
     case "GA":
       return { lines: ["...YOU ANSWERED BEFORE ANYONE SAID NURUPO.", "  TRY: NURUPO"] };
+    // ---- whoever built this machine ----
+    case "CREATOR":
+    case "AUTHOR":
+    case "MADE BY":
+    case "WHO MADE THIS":
+    case "LAB MEMBER 000":
+      return {
+        effect: "glitch",
+        lines: [
+          "> TRACING THE ORIGIN OF THIS MACHINE ......",
+          "",
+          "  CREATOR ........ ALGOWANDERER",
+          "  LAB MEMBER ..... 000",
+          "  WORLD LINE ..... UNKNOWN. NOT ON THE METER.",
+          "  GITHUB ......... GITHUB.COM/ALGOWANDERER",
+          "",
+          "> BUILT THE 5100 SO THE LAB COULD FIND IT.",
+        ],
+      };
     case "EL PSY KONGROO":
     case "EL PSY CONGROO":
       return {
