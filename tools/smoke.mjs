@@ -7,6 +7,7 @@
 // Optional env:  TYPE="text"        type a line + Enter
 //                WHEEL="x,y,dy,n"   n wheel events at (x,y)
 //                HOLD="KeyF,KeyJ"   hold keys down for the screenshot
+//                TYPE_WAIT=ms      wait after typing (default 1500)
 //                POWEROFF=ms        press POWER OFF, screenshot after ms
 //                Q="?nofx"  SIZE="800x550"  WAIT=ms  OUT=file.png
 import puppeteer from "puppeteer-core";
@@ -26,7 +27,7 @@ page.on("console", (m) => {
 });
 page.on("pageerror", (e) => console.log("[pageerror]", e.message));
 
-await page.goto("http://localhost:5173/" + (env.Q || ""), { waitUntil: "networkidle0" });
+await page.goto("http://localhost:" + (env.PORT || 5173) + "/" + (env.Q || ""), { waitUntil: "networkidle0" });
 await page.click(".power-prompt");
 await sleep(Number(env.WAIT || 9000));
 
@@ -40,9 +41,9 @@ if (env.WHEEL) {
   await sleep(3000);
 }
 if (env.TYPE) {
-  await page.keyboard.type(env.TYPE, { delay: 60 });
+  await page.keyboard.type(env.TYPE, { delay: Number(env.TYPE_DELAY || 60) });
   await page.keyboard.press("Enter");
-  await sleep(1500);
+  await sleep(Number(env.TYPE_WAIT || 1500));
 }
 if (env.HOLD) {
   for (const k of env.HOLD.split(",")) await page.keyboard.down(k);

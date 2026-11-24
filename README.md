@@ -51,6 +51,10 @@ sensitive, and the names in brackets also work.
 | `2036` | Tries to reach the year 2036 |
 | `2038` (`Y2K38`, `Y2038`) | Live countdown to the Unix 32-bit time overflow |
 | `UNDOCUMENTED` (`HIDDEN`, `DEBUG`) | The 5100's real hidden feature |
+| `PHOTOS` (`EVIDENCE`, `ATTACHMENTS`) | Titor's archived attachments |
+| `PHOTO 1`, `PHOTO 2`, `PHOTO 3` | His photos of the time machine, loaded from tape onto the 5100's screen |
+| `BLUEPRINT` (`SCHEMATIC`) | The C204 "major systems" cutaway drawing |
+| `DIAGRAM` | The C204 unit layout, with its parts list |
 | **Steins;Gate** | |
 | `EL PSY KONGROO` (`EL PSY CONGROO`) | An incoming transmission |
 | `DIVERGENCE` (`WORLDLINE`, `WORLD LINE`) | Divergence meter reading, not always the same one |
@@ -65,6 +69,10 @@ sensitive, and the names in brackets also work.
 | `ZOMBIE`, `ASSISTANT`, `CELEB SEVENTEEN` | Alias lookups for lab member 004 |
 | `SUZUHA` (`AMANE SUZUHA`) | A message from a part-timer |
 | `TUTURU` (`TUTTURU`) | Mayushii says hi |
+| `THANK YOU` (`THANKS`, `ARIGATOU`, `OMEDETOU`, `CONGRATULATIONS`) | The Steins;Gate 100% completion photo, scanned onto the 5100's screen |
+
+The 5100 counts the 19 secrets above (not the pictures). Find them all and it
+announces your 100% and tells you to say `THANK YOU`.
 
 ## Running locally
 
@@ -81,6 +89,8 @@ Other scripts:
 
 - `npm run smoke` takes a headless screenshot. It needs `CHROME=<path to chrome.exe>`
   and the dev server running.
+- `node tools/pictures.mjs <folder>` rebuilds the 1-bit dot pictures in
+  `public/images/` from their source images (not in this repo).
 - `npm run model` re-compresses the source model into `public/models/ibm5100.web.glb`.
   The full-size source `ibm5100.glb` is not in this repo. Download it from the
   [model's Sketchfab page](https://sketchfab.com/3d-models/ibm5100-ba277a88f0b14fe3802d0f4e52afd2cb)
@@ -118,6 +128,10 @@ Full credits, licences and trademark notes are on the site's
 - 3D model "IBM5100" by [JP_2793](https://sketchfab.com/3d-models/ibm5100-ba277a88f0b14fe3802d0f4e52afd2cb),
   [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). Non-commercial use only.
 - CRT buzz audio by artificiallyinspired.
+- The hidden lab photo is the *Steins;Gate* 100% achievement artwork, © MAGES.,
+  shown as a reduced 1-bit dot version as a fan tribute.
+- The time machine photos and drawings are the images "John Titor" posted
+  online in 2000-2001, shown as reduced 1-bit dot versions.
 - Fonts: VT323 by Peter Hull and IBM Plex Mono by IBM, both SIL OFL 1.1.
 
 This is a fan project. It is not affiliated with, sponsored by, or endorsed by

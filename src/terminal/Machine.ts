@@ -1,11 +1,22 @@
 import { BasicError } from "./basic/lexer";
 import { Basic } from "./basic/interpreter";
-import { checkEasterEgg, type MachineEffect } from "./easterEggs";
+import { checkEasterEgg, checkPictureEgg, eggId, EGG_IDS, EGG_TOTAL, type MachineEffect, type PictureEgg } from "./easterEggs";
+import { PICTURES, type PictureName } from "./pictures.gen";
 
 export const COLS = 64;
 export const ROWS = 16;
 const MAX_INPUT = 120;
 const TAPE_PREFIX = "ibm5100.tape.";
+const FOUND_KEY = "ibm5100.eggs";
+
+/** A picture on screen, anchored to text rows so it scrolls with them. */
+export interface Picture {
+  name: PictureName;
+  /** Text row of the picture's top edge (negative once scrolled partly away). */
+  top: number;
+  /** How many dot rows have been drawn in so far, 0..PICTURES[name].h. */
+  shown: number;
+}
 
 type State = "off" | "boot" | "ready" | "running" | "input" | "tape";
 
@@ -70,6 +81,7 @@ export class Machine {
   row = 0;
   col = 0;
   state: State = "off";
+  picture: Picture | null = null;
   /** Bumped on every visible change, so renderers can skip redundant redraws. */
   version = 0;
   /** `ms` is how long the effect lasts, for effects that have a duration (tape). */
@@ -144,6 +156,7 @@ export class Machine {
 
   private clearGrid() {
     this.grid = Array.from({ length: ROWS }, () => new Array<string>(COLS).fill(" "));
+    this.picture = null;
   }
 
   private touch() { this.version++; }
@@ -159,6 +172,7 @@ export class Machine {
     this.grid.shift();
     this.grid.push(new Array<string>(COLS).fill(" "));
     this.row = ROWS - 1;
+    if (this.picture && --this.picture.top + PICTURES[this.picture.name].rows <= 0) this.picture = null;
   }
 
   private putChar(ch: string) {
@@ -248,8 +262,8 @@ export class Machine {
     this.later(() => {
       if (this.state !== "tape") return; // powered off mid-tape
       this.newline();
-      done();
       this.state = "ready";
+      done(); // may take the machine busy again
     }, ms);
   }
 
@@ -264,16 +278,74 @@ export class Machine {
     return [...names];
   }
 
+  // ---- 100% completion -------------------------------------------------
+
+  /** Remembers which secrets were found; announces the reward on the last one. */
+  private recordFind(id: string) {
+    if (!EGG_IDS.has(id)) return;
+    let found: string[] = [];
+    try { found = JSON.parse(localStorage.getItem(FOUND_KEY) ?? "[]"); } catch { /* storage blocked */ }
+    found = found.filter((f) => EGG_IDS.has(f));
+    if (found.includes(id)) return;
+    found.push(id);
+    try { localStorage.setItem(FOUND_KEY, JSON.stringify(found)); } catch { /* storage blocked */ }
+    if (found.length < EGG_TOTAL) return;
+    this.later(() => {
+      if (this.state !== "ready") return;
+      this.writeLine("");
+      this.writeLine(`*** ACHIEVEMENT: ${EGG_TOTAL}/${EGG_TOTAL} SECRETS FOUND (100%) ***`);
+      this.writeLine("  THE LAB LEFT SOMETHING FOR YOU. SAY THANK YOU.");
+      this.onEffect?.("divergence");
+    }, 900);
+  }
+
+  /**
+   * A picture egg: found on tape, then drawn in top to bottom like a
+   * slow-scan transmission, in the 5100's own phosphor dots.
+   */
+  private showPicture({ picture, tape, caption }: PictureEgg) {
+    const { h, rows } = PICTURES[picture];
+    const search = 1500;
+    const steps = 36;
+    const stepMs = 75;
+    this.tape(`SEARCHING ${tape}`, search, () => {
+      this.state = "tape"; // keep typing blocked while the picture comes in
+      this.cls();
+      this.picture = { name: picture, top: 0, shown: 0 };
+      this.touch();
+      for (let i = 1; i <= steps; i++) {
+        this.later(() => {
+          if (!this.picture) return;
+          this.picture.shown = Math.round((h * i) / steps);
+          this.touch();
+        }, i * stepMs);
+      }
+      this.later(() => {
+        if (this.state !== "tape") return; // powered off meanwhile
+        this.row = rows;
+        this.col = 0;
+        caption.forEach((l) => this.writeLine(l));
+        this.onEffect?.("check");
+        this.state = "ready";
+      }, steps * stepMs + 400);
+    });
+    this.later(() => this.onEffect?.("tape", steps * stepMs), search);
+  }
+
   // ---- command handling -------------------------------------------------
 
   private submitLine(raw: string) {
     const line = raw.trim();
     if (!line) return;
 
+    const picture = checkPictureEgg(line);
+    if (picture) return this.showPicture(picture);
+
     const egg = checkEasterEgg(line);
     if (egg) {
       egg.lines.forEach((l) => this.writeLine(l));
       if (egg.effect) this.onEffect?.(egg.effect);
+      this.recordFind(eggId(egg));
       return;
     }
 

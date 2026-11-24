@@ -1,8 +1,9 @@
 // Hidden words for Steins;Gate fans. Checked before BASIC sees the line.
+import type { PictureName } from "./pictures.gen";
 
 export type MachineEffect = "glitch" | "divergence" | "static" | "tape" | "check";
 
-interface EggResult {
+export interface EggResult {
   lines: string[];
   effect?: MachineEffect;
 }
@@ -56,8 +57,98 @@ function y2038Countdown(): string[] {
   ];
 }
 
+/** Collapses spacing and trailing ! or . so "EL PSY KONGROO." still matches. */
+export function normalizeEggInput(input: string): string {
+  return input.trim().replace(/\s+/g, " ").replace(/[.!]+$/, "");
+}
+
+/** One spelling of every secret; aliases of the same secret are not listed twice. */
+const EGG_COMMANDS = [
+  "TITOR", "C204", "2036", "2038", "UNDOCUMENTED", "SUZUHA", "EL PSY KONGROO", "IBN",
+  "SERN", "DIVERGENCE", "TUTURU", "DMAIL", "OPERATION SKULD", "LAB", "OKABE", "KURISU",
+  "CHRISTINA", "ZOMBIE", "ASSISTANT",
+];
+
+/**
+ * Which secret a result belongs to: its first non-blank line, which is the
+ * same for every alias (and fixed even for the random/countdown ones).
+ */
+export function eggId(egg: EggResult): string {
+  return egg.lines.find((l) => l.trim()) ?? "";
+}
+
+/** The secrets that count toward 100%. */
+export const EGG_IDS = new Set(EGG_COMMANDS.map((c) => eggId(checkEasterEgg(c)!)));
+export const EGG_TOTAL = EGG_IDS.size;
+
+/** A picture the 5100 reads off tape and scans onto the screen. */
+export interface PictureEgg {
+  picture: PictureName;
+  /** File name shown while the tape searches. */
+  tape: string;
+  /** Text printed under the picture once it is in. */
+  caption: string[];
+}
+
+const LAB_PHOTO: PictureEgg = {
+  picture: "labphoto",
+  tape: "LABPHOTO",
+  caption: [
+    "OMEDETOU! EVERY LAB MEMBER, ON WORLD LINE 1.048596.",
+    "THANK YOU FOR STAYING UNTIL THE END. - FUTURE GADGET LAB",
+  ],
+};
+
+const PICTURE_EGGS: Record<string, PictureEgg> = {
+  // wholesome words for the Steins;Gate 100% picture
+  "THANK YOU": LAB_PHOTO, THANKYOU: LAB_PHOTO, THANKS: LAB_PHOTO, ARIGATOU: LAB_PHOTO, ARIGATO: LAB_PHOTO,
+  OMEDETOU: LAB_PHOTO, OMEDETO: LAB_PHOTO, CONGRATULATIONS: LAB_PHOTO, CONGRATS: LAB_PHOTO,
+
+  // John Titor's forum attachments
+  "PHOTO 1": {
+    picture: "laser",
+    tape: "ATTACH01",
+    caption: ["PHOTO 1: A LASER BEAM BENDING NEAR THE UNIT'S GRAVITY FIELD.", "  (AS DESCRIBED BY TIMETRAVEL_0.)"],
+  },
+  "PHOTO 2": {
+    picture: "unit",
+    tape: "ATTACH02",
+    caption: ["PHOTO 2: THE C204 UNIT, MOUNTED IN THE BACK OF HIS CAR.", "  NOTE THE HAZARD STRIPES. COMPARE: BLUEPRINT."],
+  },
+  "PHOTO 3": {
+    picture: "remote",
+    tape: "ATTACH03",
+    caption: ["PHOTO 3: UNIT POWERED UP. THE BOX ON THE SEAT WITH THE COILED", "  CORD IS THE REMOTE CONTROL UNIT (ITEM 3, SEE DIAGRAM)."],
+  },
+  BLUEPRINT: {
+    picture: "blueprint",
+    tape: "C204-SYS",
+    caption: ["MAJOR SYSTEMS DESCRIPTION - ARMY MODEL GE / C204", "  RESTRICTED. FILE: TMIM-2006/4005"],
+  },
+  DIAGRAM: {
+    picture: "diagram",
+    tape: "C204-UNIT",
+    caption: [
+      "C204 UNIT LAYOUT",
+      "  1 MAIN SINGULARITY         6 MAIN UNIT ON/OFF SWITCH",
+      "  2 STEERING SINGULARITY     7 UNIT CONTROL INSTRUCTIONS",
+      "  3 REMOTE CONTROL UNIT      8 EMERGENCY CONTROLS",
+      "  4 EMERGENCY VIEW SCREEN    9 REMOTE STORAGE UNIT",
+      "  5 EMERGENCY DISCONNECT",
+    ],
+  },
+};
+for (const [alias, name] of [
+  ["PHOTO1", "PHOTO 1"], ["PHOTO2", "PHOTO 2"], ["PHOTO3", "PHOTO 3"],
+  ["SCHEMATIC", "BLUEPRINT"], ["SCHEMATICS", "BLUEPRINT"], ["BLUEPRINTS", "BLUEPRINT"],
+] as const) PICTURE_EGGS[alias] = PICTURE_EGGS[name];
+
+export function checkPictureEgg(input: string): PictureEgg | null {
+  return PICTURE_EGGS[normalizeEggInput(input)] ?? null;
+}
+
 export function checkEasterEgg(input: string): EggResult | null {
-  const w = input.trim().replace(/\s+/g, " ").replace(/[.!]+$/, "");
+  const w = normalizeEggInput(input);
   switch (w) {
     // ---- John Titor, the "time traveller from 2036" who said he came back for a 5100 ----
     case "TITOR":
@@ -74,6 +165,7 @@ export function checkEasterEgg(input: string): EggResult | null {
           "> NOTE .......... THIS IS ONLY ONE WORLD LINE OF MANY.",
           "> SIGNAL LOST.",
           "  (A TAPE WAS LEFT IN THE DRIVE. TRY DIR.)",
+          "  (HE LEFT PHOTOS TOO. TRY PHOTOS.)",
         ],
       };
     case "C204":
@@ -85,6 +177,23 @@ export function checkEasterEgg(input: string): EggResult | null {
           "  DRIVE ............. 2 x KERR MICRO SINGULARITY",
           "  TIMING ............ 3 x CESIUM CLOCK",
           "  STATUS ............ NOT FOUND ON THIS WORLD LINE",
+          "  DRAWINGS ON TAPE .. BLUEPRINT, DIAGRAM",
+        ],
+      };
+    case "PHOTOS":
+    case "PICTURES":
+    case "ATTACHMENTS":
+    case "EVIDENCE":
+    case "TITOR PHOTOS":
+      return {
+        lines: [
+          "TIMETRAVEL_0 // ATTACHMENTS, POSTED ONLINE 2000-2001",
+          "  PHOTO 1 ...... LASER TEST",
+          "  PHOTO 2 ...... THE UNIT, INSTALLED",
+          "  PHOTO 3 ...... THE UNIT, POWERED",
+          "  BLUEPRINT .... C204 MAJOR SYSTEMS",
+          "  DIAGRAM ...... C204 UNIT LAYOUT",
+          "TYPE A NAME TO LOAD IT FROM TAPE.",
         ],
       };
     case "2036":
