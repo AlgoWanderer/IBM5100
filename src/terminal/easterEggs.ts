@@ -66,7 +66,7 @@ export function normalizeEggInput(input: string): string {
 const EGG_COMMANDS = [
   "TITOR", "C204", "2036", "2038", "UNDOCUMENTED", "SUZUHA", "EL PSY KONGROO", "IBN",
   "SERN", "DIVERGENCE", "TUTURU", "DMAIL", "OPERATION SKULD", "LAB", "OKABE", "KURISU",
-  "CHRISTINA", "ZOMBIE", "ASSISTANT",
+  "CHRISTINA", "ZOMBIE", "ASSISTANT", "STEINS;GATE", "NURUPO",
 ];
 
 /**
@@ -225,6 +225,39 @@ export function checkEasterEgg(input: string): EggResult | null {
         effect: "glitch",
         lines: ["> JOHN TITOR WAS A NAME. NOTHING MORE.", "> THE MACHINE IS STILL ON THE ROOF.", "> - A PART-TIMER FROM 2036"],
       };
+    // ---- the world line where nobody has to die ----
+    case "STEINS;GATE":
+    case "STEINS GATE":
+    case "STEINSGATE":
+      return {
+        effect: "divergence",
+        lines: [
+          "> WORLD LINE 1.048596",
+          "  BEYOND THE ALPHA AND BETA ATTRACTOR FIELDS.",
+          "  MAYURI LIVES. KURISU LIVES.",
+          "  THE FUTURE IS NOT YET DECIDED.",
+          "",
+          "> THIS IS THE CHOICE OF STEINS;GATE.",
+        ],
+      };
+    // ---- the @channel call and response that outs Kurisu ----
+    case "NURUPO":
+    case "NULLPO":
+      return {
+        effect: "static",
+        lines: [
+          "> NURUPO",
+          "> GA!",
+          "",
+          "  REPLY TIME .... 0.3 SEC",
+          "  SOURCE ........ LAB MEMBER 004",
+          "  DIAGNOSIS ..... @CHANNELER. CONFIRMED.",
+          "",
+          "  (SHE WILL DENY THIS.)",
+        ],
+      };
+    case "GA":
+      return { lines: ["...YOU ANSWERED BEFORE ANYONE SAID NURUPO.", "  TRY: NURUPO"] };
     case "EL PSY KONGROO":
     case "EL PSY CONGROO":
       return {
@@ -343,13 +376,14 @@ export function checkEasterEgg(input: string): EggResult | null {
           "  LAB MEMBER ........... 004",
           "  CHRISTINA ............ (OKABE, WILL NOT STOP)",
           "  THE ZOMBIE ........... (OKABE)",
-          "  CELEB SEVENTEEN ...... (POSTED AS, ON @CHANNEL)",
+          "  CELEB SEVENTEEN ...... (OKABE)",
           "  ASSISTANT ............ (OKABE)",
-          "  PERVERTED GENIUS GIRL  (OKABE, DISPUTED)",
-          "  AMERICAN VIRGIN ...... (DARU)",
+          "  PERVERTED GENIUS GIRL  (OKABE)",
+          "  AMERICAN VIRGIN ...... (OKABE)",
+          "  KURIGOHAN AND KAMEHAMEHA  (HER OWN @CHANNEL HANDLE)",
           "",
-          "  SHE IS NEUROSCIENCE. SHE IS NOT A ZOMBIE.",
-          "  \"IT'S NOT LIKE I LIKE YOU OR ANYTHING.\"",
+          "  SHE IS A NEUROSCIENTIST. SHE IS NOT A ZOMBIE.",
+          "  \"I AM NOT A TSUNDERE!\"",
         ],
       };
     case "CHRISTINA":
@@ -366,6 +400,8 @@ export function checkEasterEgg(input: string): EggResult | null {
     case "THE ZOMBIE":
       return { lines: ["THE ZOMBIE IS NOT A ZOMBIE.", "  SEE: KURISU, LAB MEMBER 004."] };
     case "CELEB SEVENTEEN":
+    case "KURIGOHAN":
+    case "KURIGOHAN AND KAMEHAMEHA":
     case "ASSISTANT":
       return { lines: ["ALIAS RESOLVED -> MAKISE KURISU (004).", "  TRY: KURISU"] };
   }

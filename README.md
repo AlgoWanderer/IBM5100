@@ -56,6 +56,7 @@ sensitive, and the names in brackets also work.
 | `BLUEPRINT` (`SCHEMATIC`) | The C204 "major systems" cutaway drawing |
 | `DIAGRAM` | The C204 unit layout, with its parts list |
 | **Steins;Gate** | |
+| `STEINS;GATE` (`STEINS GATE`, `STEINSGATE`) | The world line where nobody has to die |
 | `EL PSY KONGROO` (`EL PSY CONGROO`) | An incoming transmission |
 | `DIVERGENCE` (`WORLDLINE`, `WORLD LINE`) | Divergence meter reading, not always the same one |
 | `IBN 5100` (`IBN`, `IBN5100`) | The machine from another world line |
@@ -66,7 +67,8 @@ sensitive, and the names in brackets also work.
 | `OKABE` (`OKARIN`, `RINTAROU`, `KYOUMA`, `HOUOIN KYOUMA`, …) | The mad scientist introduces himself |
 | `KURISU` (`MAKISE`, `MAKISE KURISU`) | Every nickname Kurisu has been given |
 | `CHRISTINA` | She has something to say about that |
-| `ZOMBIE`, `ASSISTANT`, `CELEB SEVENTEEN` | Alias lookups for lab member 004 |
+| `ZOMBIE`, `ASSISTANT`, `CELEB SEVENTEEN`, `KURIGOHAN` | Alias lookups for lab member 004 |
+| `NURUPO` (`NULLPO`) | The @channel call and response |
 | `SUZUHA` (`AMANE SUZUHA`) | A message from a part-timer |
 | `TUTURU` (`TUTTURU`) | Mayushii says hi |
 | `THANK YOU` (`THANKS`, `ARIGATOU`, `OMEDETOU`, `CONGRATULATIONS`) | The Steins;Gate 100% completion photo, scanned onto the 5100's screen |
